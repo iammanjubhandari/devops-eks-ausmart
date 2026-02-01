@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Build artifacts
+target/
+build/
+*.jar
+
+# Logs
+*.log
+
+# Environment files (except those needed)
+.env*
+
+# Maven wrapper
+mvnw*
+.mvn/wrapper/maven-wrapper.jar
+
+# Temporary files
+tmp/
+temp/
