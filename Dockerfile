@@ -10,12 +10,15 @@ RUN dnf --setopt=install_weak_deps=False install -q -y \
 
 WORKDIR /workspace
 
+# COPY 1: Dependency files (rarely changes) - CACHED LAYER
 COPY pom.xml .
 COPY .mvn/ .mvn/
 COPY mvnw .
 
+# Download dependencies - CACHED unless pom.xml changes
 RUN ./mvnw dependency:go-offline -B -q
 
+# COPY 2: Source code (frequently changes) - SEPARATE LAYER
 COPY src/ src/
 
 RUN ./mvnw -DskipTests clean package -q && \
