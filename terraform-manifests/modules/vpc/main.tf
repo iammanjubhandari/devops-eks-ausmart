@@ -25,3 +25,12 @@ resource "aws_subnet" "public" {
   })
 }
 
+resource "aws_subnet" "private" {
+  for_each = { for idx, az in local.azs : az => local.private_subnets[idx] }
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = each.value
+  availability_zone = each.key
+  tags = merge(var.tags, {
+    Name = "${var.environment_name}-private-${each.key}"
+  })
+}
