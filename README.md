@@ -11,6 +11,7 @@ This repository demonstrates **end-to-end DevOps ownership**: from **infrastruct
 
 🎯 Designed to showcase **job-ready DevOps & Cloud Engineering skills** for production teams.
 
+
 ## 🧰 Stack Overview
 
 | Layer                  | Tooling                               |
@@ -29,16 +30,14 @@ This repository demonstrates **end-to-end DevOps ownership**: from **infrastruct
 | Datastores             | RDS (MySQL/Postgres), DynamoDB, Redis |
 | Messaging              | Amazon SQS                            |
 
+
 ## 🏗️ Architecture Overview
 
 **Frontend → Microservices → AWS Data Plane → Observability**
 
 - Microservices deployed on EKS
-    
 - AWS-managed databases and messaging
-    
 - GitOps-driven deployments
-    
 - Fully automated DNS, TLS, scaling, and monitoring
     
 
@@ -63,7 +62,7 @@ All services are:
 - GitOps-controlled
 
 
-### 🔹 Platform Architecture
+## 🔹 Platform Architecture
 
 - **AWS EKS (Multi-AZ)**
 - **Private worker nodes**
@@ -71,6 +70,7 @@ All services are:
 - **External DNS with Route53**
 - **TLS via ACM**
 - **GitOps with ArgoCD**
+
 
 ## 🐳 Containerisation
 
@@ -80,6 +80,7 @@ All services are:
 - Docker Compose for local multi-service testing
     
 ---
+
 
 ## ☸️ Kubernetes Capabilities
 
@@ -109,6 +110,7 @@ It aligns closely with **DevOps / Cloud / Platform Engineer roles:
 - Healthcare
 - SaaS
 - Consulting
+
 
 ## 📚 Reference Project
 
