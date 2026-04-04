@@ -1,119 +1,80 @@
 # devops-eks-ausmart
 
-# Production Ready Retail Store Microservices Platform on AWS (EKS + Terraform + GitOps)
+Production-ready retail store microservices platform on AWS EKS, built with Terraform, Kubernetes, Helm, and GitOps.
 
 ## Overview
-A **production-grade, cloud-native retail e-commerce platform** deployed on **Amazon EKS**, built using Terraform, Kubernetes, Helm, GitHub Actions, GitOps (ArgoCD), autoscaling, and observability
 
-This repository demonstrates **end-to-end DevOps ownership**: from **infrastructure provisioning** to **secure application delivery**, **autoscaling**, **monitoring**, and **GitOps-driven CI/CD** following patterns used in real-world enterprise AWS environments.
+Cloud-native retail e-commerce platform deployed on Amazon EKS. Covers end-to-end DevOps ownership: infrastructure provisioning, secure application delivery, autoscaling, monitoring, and GitOps-driven CI/CD.
 
-⚙️ Built for **reliability, scalability, security, and cost optimisation**.
+Built for reliability, scalability, security, and cost optimisation — following patterns used in real-world enterprise AWS environments.
 
-🎯 Designed to showcase **job-ready DevOps & Cloud Engineering skills** for production teams.
+## Stack
 
+| Layer | Tooling |
+| ----- | ------- |
+| Cloud Provider | AWS |
+| Container Runtime | Docker |
+| Kubernetes | Amazon EKS |
+| Infrastructure as Code | Terraform |
+| App Packaging | Helm |
+| GitOps CD | ArgoCD |
+| CI | GitHub Actions |
+| Autoscaling | HPA, Karpenter |
+| Observability | OpenTelemetry (ADOT), X-Ray, AMP, AMG |
+| Secrets | AWS Secrets Manager, CSI Driver |
+| Networking | ALB Ingress, External DNS, Route53 |
+| Datastores | RDS (MySQL/Postgres), DynamoDB, Redis |
+| Messaging | Amazon SQS |
 
-## 🧰 Stack Overview
+## Microservices
 
-| Layer                  | Tooling                               |
-| ---------------------- | ------------------------------------- |
-| Cloud Provider         | AWS                                   |
-| Container Runtime      | Docker                                |
-| Kubernetes             | Amazon EKS                            |
-| Infrastructure as Code | Terraform                             |
-| App Packaging          | Helm                                  |
-| GitOps CD              | ArgoCD                                |
-| CI                     | GitHub Actions                        |
-| Autoscaling            | HPA, Karpenter                        |
-| Observability          | OpenTelemetry (ADOT), X-Ray, AMP, AMG |
-| Secrets                | AWS Secrets Manager, CSI Driver       |
-| Networking             | ALB Ingress, External DNS, Route53    |
-| Datastores             | RDS (MySQL/Postgres), DynamoDB, Redis |
-| Messaging              | Amazon SQS                            |
+| Service | Language | Backing Service |
+| ------- | -------- | --------------- |
+| UI | Java Spring Boot | — |
+| Catalog | Go | Amazon RDS (MySQL) |
+| Carts | Java Spring Boot | DynamoDB |
+| Orders | Java Spring Boot | Amazon RDS (PostgreSQL) |
+| Checkout | Node.js | Redis + Amazon SQS |
 
+All services are independently deployable, containerised, Helm-managed, and GitOps-controlled.
 
-## 🏗️ Architecture Overview
+## Platform Architecture
 
-**Frontend → Microservices → AWS Data Plane → Observability**
+- AWS EKS (Multi-AZ) with private worker nodes
+- ALB Ingress Controller + External DNS with Route53
+- TLS via ACM
+- GitOps with ArgoCD
+- Karpenter for node autoscaling, HPA for pod autoscaling
 
-- Microservices deployed on EKS
-- AWS-managed databases and messaging
-- GitOps-driven deployments
-- Fully automated DNS, TLS, scaling, and monitoring
-    
-
-> This architecture mirrors **production AWS environments**, not local demos.
-
-
-## 🧩 Microservices
-
-|Service|Language|Backing Service|
-|---|---|---|
-|UI|Java Spring Boot|—|
-|Catalog|Go|Amazon RDS (MySQL)|
-|Carts|Java Spring Boot|DynamoDB|
-|Orders|Java Spring Boot|Amazon RDS (PostgreSQL)|
-|Checkout|Node.js|Redis + Amazon SQS|
-
-All services are:
-
-- Independently deployable
-- Containerised
-- Helm-managed
-- GitOps-controlled
-
-
-## 🔹 Platform Architecture
-
-- **AWS EKS (Multi-AZ)**
-- **Private worker nodes**
-- **ALB Ingress Controller**
-- **External DNS with Route53**
-- **TLS via ACM**
-- **GitOps with ArgoCD**
-
-
-## 🐳 Containerisation
+## Containerisation
 
 - Multi-stage Docker builds
 - BuildKit & buildx (multi-arch: AMD64 / ARM64)
-- Image hardening & security best practices
+- Image hardening (non-root user, minimal base images)
 - Docker Compose for local multi-service testing
-    
----
 
-
-## ☸️ Kubernetes Capabilities
+## Kubernetes Capabilities
 
 - Deployments, Services, StatefulSets
-- ConfigMaps & Secrets
+- ConfigMaps & Secrets (via Secrets Store CSI)
 - Persistent Volumes (EBS CSI)
 - ALB Ingress (HTTP/HTTPS)
 - Liveness & readiness probes
 - Resource requests & limits
+- NetworkPolicies for pod-to-pod isolation
 - Namespaces & RBAC
 
+## Project Structure
 
-## 🧠 Why This Project Exists
+```text
+modules/          # Reusable Terraform modules (VPC, EKS, KMS, etc.)
+envs/             # Per-environment configs (au-dev, au-prod, us-prod)
+kubernetes/       # K8s manifests and Helm charts
+autoscaling/      # HPA and Karpenter configs
+cicd/             # GitHub Actions + ArgoCD
+observability/    # ADOT collectors for traces, logs, metrics
+```
 
-This repository was built to demonstrate:
+## Reference
 
-- **End-to-end ownership** of platform engineering
-- **Production decision-making**, not tool demos
-- **Cost-aware AWS design** 
-- **Modern GitOps workflows**
-- **Enterprise observability & scaling patterns**
-
-It aligns closely with **DevOps / Cloud / Platform Engineer roles:
-
-- FinTech
-- Government
-- Healthcare
-- SaaS
-- Consulting
-
-
-## 📚 Reference Project
-
-- Original AWS Sample App  
-    [https://github.com/aws-containers/retail-store-sample-app](https://github.com/aws-containers/retail-store-sample-app)
-
+Original AWS Sample App: [retail-store-sample-app](https://github.com/aws-containers/retail-store-sample-app)
