@@ -75,6 +75,12 @@ cicd/             # GitHub Actions + ArgoCD
 observability/    # ADOT collectors for traces, logs, metrics
 ```
 
+## Why this project exists
+
+Built to demonstrate end-to-end platform engineering ownership — not just tool demos. Every decision (single NAT in dev, Karpenter over Cluster Autoscaler, Pod Identity over IRSA) is documented with reasoning.
+
+Targets DevOps / Cloud / Platform Engineer roles in FinTech, Government, Healthcare, SaaS, and Consulting.
+
 ## Reference
 
 Original AWS Sample App: [retail-store-sample-app](https://github.com/aws-containers/retail-store-sample-app)
