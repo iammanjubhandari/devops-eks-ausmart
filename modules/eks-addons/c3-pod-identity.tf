@@ -1,3 +1,13 @@
+data "aws_eks_cluster" "main" {
+  name = var.cluster_name
+}
+
+data "aws_eks_addon_version" "pod_identity" {
+  addon_name         = "eks-pod-identity-agent"
+  kubernetes_version = data.aws_eks_cluster.main.version
+  most_recent        = true
+}
+
 # pod identity agent - needed before any other add-on that uses pod identity
 resource "aws_eks_addon" "pod_identity" {
   cluster_name  = var.cluster_name
