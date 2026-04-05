@@ -76,6 +76,10 @@ output "cluster_arn" {
   value = module.eks_cluster.cluster_arn
 }
 
+output "cluster_oidc_issuer_url" {
+  value = module.eks_cluster.cluster_oidc_issuer_url
+}
+
 output "configure_kubectl" {
   description = "Run this to configure kubectl"
   value       = "aws eks update-kubeconfig --name ${module.eks_cluster.cluster_name} --region ${var.aws_region}"
