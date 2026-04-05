@@ -19,3 +19,15 @@ resource "helm_release" "secrets_store_csi" {
 
   depends_on = [aws_eks_addon.pod_identity]
 }
+
+# AWS provider - this is what actually talks to Secrets Manager
+# CSI driver is generic, this makes it AWS-aware
+resource "helm_release" "secrets_provider_aws" {
+  name       = "secrets-store-csi-driver-provider-aws"
+  repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
+  chart      = "secrets-store-csi-driver-provider-aws"
+  namespace  = "kube-system"
+  version    = "0.3.6"
+
+  depends_on = [helm_release.secrets_store_csi]
+}
