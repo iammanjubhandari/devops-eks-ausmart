@@ -92,6 +92,46 @@ variable "github_repo" {
   default     = "github.com/iammanjubhandari/devops-eks-ausmart"
 }
 
+# EKS
+variable "cluster_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.31"
+}
+
+variable "node_instance_type" {
+  description = "EC2 instance type for managed node group"
+  type        = string
+  default     = "t3.medium"
+}
+
+variable "node_min_size" {
+  type    = number
+  default = 1
+}
+
+variable "node_max_size" {
+  type    = number
+  default = 6
+}
+
+variable "node_desired_size" {
+  type    = number
+  default = 3
+}
+
+variable "node_disk_size" {
+  description = "EBS volume size in GB"
+  type        = number
+  default     = 30
+}
+
+variable "public_access_cidrs" {
+  description = "CIDRs allowed to hit EKS API - lock down in prod"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
 # KMS
 variable "enable_kms" {
   description = "Create customer-managed KMS keys - off for dev, on for prod"
