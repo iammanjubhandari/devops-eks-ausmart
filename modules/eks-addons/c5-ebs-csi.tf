@@ -27,3 +27,24 @@ resource "aws_eks_pod_identity_association" "ebs_csi" {
 
   tags = var.common_tags
 }
+
+data "aws_eks_addon_version" "ebs_csi" {
+  addon_name         = "aws-ebs-csi-driver"
+  kubernetes_version = data.aws_eks_cluster.main.version
+  most_recent        = true
+}
+
+resource "aws_eks_addon" "ebs_csi" {
+  cluster_name  = var.cluster_name
+  addon_name    = "aws-ebs-csi-driver"
+  addon_version = data.aws_eks_addon_version.ebs_csi.version
+
+  tags = merge(var.common_tags, {
+    Name = "${var.name_prefix}-addon-ebs-csi"
+  })
+
+  depends_on = [
+    aws_eks_addon.pod_identity,
+    aws_eks_pod_identity_association.ebs_csi
+  ]
+}
