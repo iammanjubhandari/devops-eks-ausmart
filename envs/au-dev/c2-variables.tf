@@ -84,3 +84,10 @@ variable "cluster_name" {
   type        = string
   default     = "ausmart-eks"
 }
+
+# KMS
+variable "enable_kms" {
+  description = "Create customer-managed KMS keys - off for dev, on for prod"
+  type        = bool
+  default     = false
+}
