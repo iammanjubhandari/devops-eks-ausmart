@@ -33,3 +33,6 @@ public_access_cidrs = ["0.0.0.0/0"]  # restrict in prod
 
 # Security
 enable_kms = false  # saves ~$3/mo, enable in prod
+
+# Secrets: CSI driver + AWS provider installed via eks-addons module
+# SecretProviderClass manifests come in Phase 3
