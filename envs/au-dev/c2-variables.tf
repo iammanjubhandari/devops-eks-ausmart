@@ -85,6 +85,13 @@ variable "cluster_name" {
   default     = "ausmart-eks"
 }
 
+# AppRegistry
+variable "github_repo" {
+  description = "GitHub repo URL for AppRegistry metadata"
+  type        = string
+  default     = "github.com/iammanjubhandari/devops-eks-ausmart"
+}
+
 # KMS
 variable "enable_kms" {
   description = "Create customer-managed KMS keys - off for dev, on for prod"
