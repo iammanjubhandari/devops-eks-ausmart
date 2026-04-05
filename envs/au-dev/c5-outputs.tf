@@ -29,6 +29,22 @@ output "s3_vpc_endpoint_id" {
   value = module.vpc.s3_vpc_endpoint_id
 }
 
+# KMS
+output "kms_s3_key_arn" {
+  description = "KMS key ARN for S3 encryption"
+  value       = module.kms.s3_key_arn
+}
+
+output "kms_eks_key_arn" {
+  description = "KMS key ARN for EKS etcd encryption"
+  value       = module.kms.eks_key_arn
+}
+
+output "kms_rds_key_arn" {
+  description = "KMS key ARN for RDS encryption"
+  value       = module.kms.rds_key_arn
+}
+
 # Security Groups
 output "eks_nodes_sg_id" {
   description = "Security group ID for EKS nodes"
