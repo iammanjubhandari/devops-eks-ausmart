@@ -1,4 +1,6 @@
 # secrets store CSI - mounts Secrets Manager secrets into pods as volumes
+# pods get a SecretProviderClass that points at a SM secret
+# CSI fetches it at startup using pod identity, creates a k8s secret from it
 resource "helm_release" "secrets_store_csi" {
   name       = "secrets-store-csi-driver"
   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
