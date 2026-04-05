@@ -28,3 +28,21 @@ output "private_data_subnet_ids" {
 output "s3_vpc_endpoint_id" {
   value = module.vpc.s3_vpc_endpoint_id
 }
+
+# Security Groups
+output "eks_nodes_sg_id" {
+  description = "Security group ID for EKS nodes"
+  value       = module.security_groups.eks_nodes_sg_id
+}
+
+output "rds_mysql_sg_id" {
+  value = module.security_groups.rds_mysql_sg_id
+}
+
+output "rds_postgres_sg_id" {
+  value = module.security_groups.rds_postgres_sg_id
+}
+
+output "elasticache_sg_id" {
+  value = module.security_groups.elasticache_sg_id
+}
