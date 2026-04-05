@@ -84,3 +84,8 @@ output "configure_kubectl" {
   description = "Run this to configure kubectl"
   value       = "aws eks update-kubeconfig --name ${module.eks_cluster.cluster_name} --region ${var.aws_region}"
 }
+
+# EKS Add-ons
+output "lbc_role_arn" {
+  value = module.eks_addons.lbc_role_arn
+}
