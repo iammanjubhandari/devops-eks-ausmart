@@ -84,3 +84,10 @@ variable "cluster_name" {
   type        = string
   default     = "ausmart-eks"
 }
+
+# AppRegistry
+variable "github_repo" {
+  description = "GitHub repo URL for AppRegistry metadata"
+  type        = string
+  default     = "github.com/iammanjubhandari/devops-eks-ausmart"
+}

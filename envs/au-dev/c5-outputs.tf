@@ -1,3 +1,9 @@
+# AppRegistry
+output "appregistry_application_arn" {
+  description = "AppRegistry application ARN (for Cost Explorer)"
+  value       = module.appregistry.application_arn
+}
+
 # VPC
 output "vpc_id" {
   description = "VPC ID"
