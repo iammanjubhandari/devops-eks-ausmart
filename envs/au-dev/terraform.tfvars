@@ -21,3 +21,15 @@ enable_flow_logs         = false
 flow_logs_retention_days = 14
 
 cluster_name = "ausmart-eks"
+
+# EKS
+cluster_version    = "1.31"
+node_instance_type = "t3.medium"
+node_min_size      = 1
+node_max_size      = 6
+node_desired_size  = 3
+node_disk_size     = 30
+public_access_cidrs = ["0.0.0.0/0"]  # restrict in prod
+
+# Security
+enable_kms = false  # saves ~$3/mo, enable in prod
