@@ -62,3 +62,21 @@ output "rds_postgres_sg_id" {
 output "elasticache_sg_id" {
   value = module.security_groups.elasticache_sg_id
 }
+
+# EKS
+output "cluster_name" {
+  value = module.eks_cluster.cluster_name
+}
+
+output "cluster_endpoint" {
+  value = module.eks_cluster.cluster_endpoint
+}
+
+output "cluster_arn" {
+  value = module.eks_cluster.cluster_arn
+}
+
+output "configure_kubectl" {
+  description = "Run this to configure kubectl"
+  value       = "aws eks update-kubeconfig --name ${module.eks_cluster.cluster_name} --region ${var.aws_region}"
+}
