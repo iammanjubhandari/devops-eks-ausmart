@@ -91,3 +91,10 @@ variable "github_repo" {
   type        = string
   default     = "github.com/iammanjubhandari/devops-eks-ausmart"
 }
+
+# KMS
+variable "enable_kms" {
+  description = "Create customer-managed KMS keys - off for dev, on for prod"
+  type        = bool
+  default     = false
+}
