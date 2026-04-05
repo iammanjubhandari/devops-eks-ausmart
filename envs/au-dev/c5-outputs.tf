@@ -89,3 +89,7 @@ output "configure_kubectl" {
 output "lbc_role_arn" {
   value = module.eks_addons.lbc_role_arn
 }
+
+output "ebs_csi_role_arn" {
+  value = module.eks_addons.ebs_csi_role_arn
+}
