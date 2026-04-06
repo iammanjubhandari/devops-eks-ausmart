@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-config
+  namespace: retail
+  labels:
+    app: catalog
+data:
+  DB_TYPE: "mysql"
+  # RDS endpoint from terraform output
+  DB_HOST: "ausmart-dev-mysql.xxxxx.ap-southeast-2.rds.amazonaws.com"
+  DB_PORT: "3306"
+  DB_NAME: "catalog"
+  SERVER_PORT: "8080"
