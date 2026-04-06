@@ -47,3 +47,42 @@ resource "aws_eks_pod_identity_association" "external_dns" {
 
   tags = var.common_tags
 }
+
+resource "helm_release" "external_dns" {
+  name       = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns"
+  chart      = "external-dns"
+  namespace  = "kube-system"
+  version    = "1.14.3"
+
+  set {
+    name  = "provider"
+    value = "aws"
+  }
+
+  set {
+    name  = "serviceAccount.create"
+    value = "true"
+  }
+
+  set {
+    name  = "serviceAccount.name"
+    value = "external-dns"
+  }
+
+  set {
+    name  = "policy"
+    value = "sync"
+  }
+
+  # prevents external-dns from deleting records it didn't create
+  set {
+    name  = "txtOwnerId"
+    value = var.cluster_name
+  }
+
+  depends_on = [
+    aws_eks_addon.pod_identity,
+    aws_eks_pod_identity_association.external_dns
+  ]
+}
