@@ -93,3 +93,7 @@ output "lbc_role_arn" {
 output "ebs_csi_role_arn" {
   value = module.eks_addons.ebs_csi_role_arn
 }
+
+output "external_dns_role_arn" {
+  value = module.eks_addons.external_dns_role_arn
+}
