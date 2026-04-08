@@ -1,0 +1,57 @@
+replicaCount: 1
+
+image:
+  repository: public.ecr.aws/aws-containers/retail-store-sample-catalog
+  tag: "0.8.3"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 256m
+    memory: 512Mi
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+serviceAccount:
+  create: true
+  name: catalog-sa
+  annotations: {}
+
+# CSI secret mount for MySQL credentials
+secrets:
+  enabled: true
+  secretProviderClass: catalog-db-secret-provider
+  secretName: catalog-db-credentials
+
+config:
+  DB_TYPE: "mysql"
+  DB_HOST: "ausmart-dev-mysql.xxxxx.ap-southeast-2.rds.amazonaws.com"
+  DB_PORT: "3306"
+  DB_NAME: "catalog"
+  SERVER_PORT: "8080"
+
+probes:
+  readiness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  liveness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 30
+    periodSeconds: 15
