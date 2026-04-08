@@ -1,0 +1,51 @@
+replicaCount: 1
+
+image:
+  repository: public.ecr.aws/aws-containers/retail-store-sample-checkout
+  tag: "0.8.3"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 256m
+    memory: 512Mi
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+serviceAccount:
+  create: true
+  name: checkout-sa
+  annotations: {}
+
+config:
+  ENDPOINTS_ORDERS: "http://orders.retail.svc.cluster.local"
+  ENDPOINTS_CART: "http://cart.retail.svc.cluster.local"
+  ENDPOINTS_CATALOG: "http://catalog.retail.svc.cluster.local"
+  SERVER_PORT: "8080"
+  REDIS_URL: "redis://ausmart-dev-redis.xxxxx.cache.amazonaws.com:6379"
+
+probes:
+  readiness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  liveness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 30
+    periodSeconds: 15
