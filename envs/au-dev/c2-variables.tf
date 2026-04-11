@@ -67,6 +67,12 @@ variable "enable_vpc_endpoints" {
   default     = false
 }
 
+variable "enable_endpoint_ssm" {
+  description = "SSM + SSMMessages endpoints for node debugging"
+  type        = bool
+  default     = false
+}
+
 variable "enable_flow_logs" {
   description = "Enable VPC flow logs to CloudWatch"
   type        = bool

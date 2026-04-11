@@ -15,8 +15,10 @@ availability_zones        = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast
 
 single_nat_gateway = true  # saves ~$70/mo vs 3 NATs
 
-# Feature flags - all off for dev to save cost
-enable_vpc_endpoints     = false
+# VPC endpoints - interface ones cost ~$7/mo each (6 endpoints = $44/mo)
+# gateway endpoints (S3, DynamoDB) are always on and free
+enable_vpc_endpoints     = false   # enable in prod
+enable_endpoint_ssm      = false   # SSM for node debugging, enable if needed
 enable_flow_logs         = false
 flow_logs_retention_days = 14
 
