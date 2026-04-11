@@ -31,10 +31,11 @@ node_min_size      = 1
 node_max_size      = 6
 node_desired_size  = 3
 node_disk_size     = 30
-public_access_cidrs = ["0.0.0.0/0"]  # restrict in prod
+public_access_cidrs = ["0.0.0.0/0"]  # prod: ["YOUR.IP/32"]
 
 # Security
-enable_kms = false  # saves ~$3/mo, enable in prod
+enable_kms = false  # ~$3/mo for 3 CMKs
+enable_waf = false  # ~$10/mo for WebACL + managed rules
 
 # Secrets: CSI driver + AWS provider installed via eks-addons module
 # SecretProviderClass manifests come in Phase 3
