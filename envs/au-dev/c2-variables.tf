@@ -138,9 +138,15 @@ variable "public_access_cidrs" {
   default     = ["0.0.0.0/0"]
 }
 
-# KMS
+# Security
 variable "enable_kms" {
   description = "Create customer-managed KMS keys - off for dev, on for prod"
+  type        = bool
+  default     = false
+}
+
+variable "enable_waf" {
+  description = "WAF WebACL - off for dev, on for prod"
   type        = bool
   default     = false
 }
